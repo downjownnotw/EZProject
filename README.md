@@ -1,4 +1,8 @@
 # EZProject
 about maps kotlin using Mapbox
 
-- Show maps (Done)
+Complete
+- Show maps
+
+to do
+-  add api key mapbox (EZ-001)
