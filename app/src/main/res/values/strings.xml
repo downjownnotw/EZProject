@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">EZProject</string>
+
+    <string name="mapbox_access_token">API_KEY_HERE</string>
+</resources>
