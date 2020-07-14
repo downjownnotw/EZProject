@@ -13,16 +13,29 @@ import android.Manifest
 import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.maps.MapboxMap
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback
 
 class MainActivity : AppCompatActivity() {
     private var mapView: MapView? = null
-    private lateinit var mapboxMap: MapboxMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token))
         setContentView(R.layout.activity_main)
 
+        mapView = findViewById(R.id.mapView)
+        mapView?.onCreate(savedInstanceState)
+        checkPermission()
+
+        mapView?.getMapAsync {
+            it.addMarker(MarkerOptions().position(LatLng(48.85819, 2.29458)).title("Eiffel Tower"));
+            it.setStyle(Style.MAPBOX_STREETS) {
+                // Map is set up and the style has loaded. Now you can add data or make other map adjustments
+            }
+        }
+    }
+
+    private fun checkPermission(){
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
@@ -31,17 +44,8 @@ class MainActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 1)
             }
         }
-        //marker
-        mapboxMap.addMarker(MarkerOptions().position(LatLng(48.85819, 2.29458)).title("Eiffel Tower"));
-        mapView = findViewById(R.id.mapView)
-        mapView?.onCreate(savedInstanceState)
-        mapView?.getMapAsync { mapboxMap ->
-            mapboxMap.setStyle(Style.MAPBOX_STREETS) {
-                // Map is set up and the style has loaded. Now you can add data or make other map adjustments
-
-            }
-        }
     }
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             1 -> {
