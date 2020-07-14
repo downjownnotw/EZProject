@@ -3,6 +3,6 @@ about maps kotlin using Mapbox
 
 Complete
 - Show maps
+-  add api key mapbox, add for check permission location and add marker (01)
 
 to do
--  add api key mapbox and add for check permission location (EZ-001)
