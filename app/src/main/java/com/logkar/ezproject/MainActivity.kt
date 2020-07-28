@@ -10,6 +10,8 @@ import com.mapbox.mapboxsdk.Mapbox
 import com.mapbox.mapboxsdk.maps.Style
 import android.Manifest
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.view.animation.BounceInterpolator
 import com.mapbox.api.directions.v5.DirectionsCriteria
 import com.mapbox.api.directions.v5.models.DirectionsResponse
 import com.mapbox.api.directions.v5.models.DirectionsRoute
@@ -54,6 +56,10 @@ class MainActivity : AppCompatActivity() {
 
                 val mLocationComponentOptions = LocationComponentOptions
                     .builder(this)
+                    .pulseEnabled(true)
+                    .pulseColor(Color.GREEN)
+                    .pulseAlpha(.4f)
+                    .pulseInterpolator(BounceInterpolator())
                     .build()
 
                 val mLocationComponentActivationOptions = LocationComponentActivationOptions
